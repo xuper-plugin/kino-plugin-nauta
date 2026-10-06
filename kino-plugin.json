@@ -1,7 +1,7 @@
 {
   "id": "nauta-live-tv",
   "name": "Nauta Live TV",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "apiVersion": 6,
   "entry": "plugin.js",
   "description": "Canales de TV en vivo de Argentina, deportes, películas 24/7, infantiles, noticias y más",
@@ -13,6 +13,7 @@
     "m3u.cl",
     "*.m3u.cl"
   ],
+  "liveStreamHosts": "any",
   "capabilities": [
     "home",
     "resolve",
