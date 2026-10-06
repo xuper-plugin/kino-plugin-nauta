@@ -1,0 +1,30 @@
+{
+  "id": "nauta-live-tv",
+  "name": "Nauta Live TV",
+  "version": "1.0.0",
+  "apiVersion": 6,
+  "entry": "plugin.js",
+  "description": "Canales de TV en vivo de Argentina, deportes, películas 24/7, infantiles, noticias y más",
+  "author": "xuper-plugin",
+  "homepage": "https://github.com/xuper-plugin/kino-plugin-nauta",
+  "hosts": [
+    "stremio-addon-wheat.vercel.app",
+    { "host": "m3u.tvcluboficial.com", "insecureHttp": true },
+    "m3u.cl",
+    "*.m3u.cl"
+  ],
+  "capabilities": [
+    "home",
+    "resolve",
+    "channels"
+  ],
+  "categories": ["live"],
+  "color": "#0F52BA",
+  "icon": "icon.png",
+  "settings": [
+    { "key": "cacheSep",  "type": "section", "label": "Canales" },
+    { "key": "cacheInfo", "type": "status",  "label": "Estado de la caché" },
+    { "key": "refresh",   "type": "action",  "label": "Actualizar lista de canales",
+      "hint": "Borra la caché y vuelve a descargar todos los canales" }
+  ]
+}
