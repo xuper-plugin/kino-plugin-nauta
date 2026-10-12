@@ -127,7 +127,10 @@ function fetchCat(catId) {
       list.push({ id: m.id, title: m.name.trim(), logo: isHttpUrl(m.poster) ? m.poster : null });
     }
     // An empty answer is never cached over a good copy: cached() serves the old one instead.
-    if (!list.length && metas.length) throw kino.error("unavailable", catId + " -> no usable channel");
+    if (!list.length && metas.length) {
+      kino.log.report("catalog_empty", catId);                               // the addon changed what it answers
+      throw kino.error("unavailable", catId + " -> no usable channel");
+    }
     return list;
   });
 }
@@ -280,11 +283,18 @@ const GONE = { userMessage: "Este canal no está disponible en este momento." };
 export async function resolve(ref) {
   if (typeof ref !== "string" || !ref) throw kino.error("not_found", "empty ref", GONE);
   const body = await getJson(BASE + "/stream/tv/" + encodeURIComponent(ref) + ".json", "stream " + ref)
-    .catch(e => { throw e && e.code === "not_found" ? kino.error("not_found", "stream " + ref + " -> 404", GONE) : e; });
+    .catch(e => {
+      if (e && e.code === "not_found") throw kino.error("not_found", "stream " + ref + " -> 404", GONE);
+      kino.log.report("addon_down", String(e && e.message).slice(0, 60));   // the addon (not the channel) failed
+      throw e;
+    });
   const seen    = new Set();
   const streams = (Array.isArray(body && body.streams) ? body.streams : [])
     .filter(s => s && isHttpUrl(s.url) && !seen.has(s.url) && seen.add(s.url));
-  if (!streams.length) throw kino.error("not_found", "no playable stream for " + ref, GONE);
+  if (!streams.length) {
+    kino.log.report("no_stream", ref.slice(0, 40));                          // the addon lists it but offers nothing to play
+    throw kino.error("not_found", "no playable stream for " + ref, GONE);
+  }
   const [main, ...rest] = streams;
   return { ...toStream(main), alternatives: rest.slice(0, 9).map(toStream) };
 }
