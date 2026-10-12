@@ -1,7 +1,7 @@
 {
   "id": "nauta-live-tv",
   "name": "Nauta Live TV",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "apiVersion": 6,
   "entry": "plugin.js",
   "description": "Canales de TV en vivo de Argentina, deportes, películas 24/7, infantiles, noticias y más",
@@ -9,7 +9,6 @@
   "homepage": "https://github.com/xuper-plugin/kino-plugin-nauta",
   "hosts": [
     "stremio-addon-wheat.vercel.app",
-    { "host": "m3u.tvcluboficial.com", "insecureHttp": true },
     "m3u.cl",
     "*.m3u.cl"
   ],
