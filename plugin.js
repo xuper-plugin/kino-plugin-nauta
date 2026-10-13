@@ -55,6 +55,7 @@ const CATS = [
   { id: "mas-vistos",      label: "Más vistos",     catId: "cat_200", genre: "entretenimiento", country: "AR" },
   { id: "nacionales",      label: "Nacionales",     catId: "cat_11",  genre: "entretenimiento", country: "AR" },
   { id: "hd",              label: "HD",             catId: "cat_32",  genre: "entretenimiento" },
+  { id: "eventos",         label: "Eventos",        catId: "cat_400", genre: "deportes" },
   { id: "cine-247",        label: "Cine 24/7",      catId: "cat_10",  genre: "peliculas" },
   { id: "247",             label: "24/7",           catId: "cat_9",   genre: "entretenimiento" },
   { id: "entretenimiento", label: "Entretenimiento",catId: "cat_1",   genre: "entretenimiento" },
